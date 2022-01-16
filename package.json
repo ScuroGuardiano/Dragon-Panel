@@ -1,0 +1,11 @@
+{
+  "name": "holy-grail",
+  "packageManager": "yarn@3.1.1",
+  "private": true,
+  "scripts": {
+    "start": "yarn api:start:dev & yarn front:start &"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
