@@ -1,4 +1,4 @@
-<center>
+<div style="text-aling: center">
 
 # Holy Grail
 
@@ -30,4 +30,4 @@ yarn start
 Copyright 2022 Scuro Guardiano  
 Project is licensed under AGPLv3.0, check out LICENSE file for full license text.
 
-</center>
+</div>
