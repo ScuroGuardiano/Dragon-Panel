@@ -1,10 +1,16 @@
 <div class="wrapper">
   <div class="container">
-    <h1>Error</h1>
-    <h2>RZECZY POSZŁY W TOTALNE BANANY</h2>
-    <p>Sprawdź konsolkę, powinny tam być szczegóły błędu uwu. Jak nie ma to cóż, miłego dnia ^^</p>
-    <p>Później pobawię się, żeby informacje o błędzie wyświetliły się również tutaj</p>
-    <p><a [routerLink]="['']">Spróbuj jeszcze raz</a></p>
-    <p>Jak po kliknięciu nic się nie zmienia, sprawdź konsolkę ^^</p>
+    <span class="header">Holy Grail</span>
+    <p>A fatal exception {{ errorName }} has occured at {{ at }} in the F0CKW1N00W5(0x11) + 0069420. The current application will be terminated.</p>
+    <p>
+    * Try <a [routerLink]="['']">Going to dashboard.</a><br>
+    * If nothing happens then try restarting the whole app server.
+    </p>
+    <hr>
+    <p *ngIf="error">The core was dumped:</p>
+    <pre *ngIf="error else noErrorDetails">{{ errorToString() }}</pre>
+    <ng-template #noErrorDetails>
+      <p>The core dump is not available. Check developer console to find exception details.</p>
+    </ng-template>
   </div>
 </div>

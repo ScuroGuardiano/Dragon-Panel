@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { ErrorPageService } from '../error-page/error-page.service';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -8,7 +9,8 @@ import { AuthService } from './auth.service';
 export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private errorPageService: ErrorPageService
   ) {}
 
   async canActivate(
@@ -23,6 +25,7 @@ export class AuthGuard implements CanActivate {
     }
     catch(err) {
       console.error(err);
+      this.errorPageService.setError(err);
       return this.router.parseUrl('/error');
     }
   }
