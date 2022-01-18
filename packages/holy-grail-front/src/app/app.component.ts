@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'holy-grail';
+  code = "const = X()!.init.y()"
 }

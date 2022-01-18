@@ -1,0 +1,16 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+#login {
+  width: 500px;
+  ::ng-deep.ngx-section-content {
+      padding-top: 0 !important;
+  }
+  input[type="submit"] {
+    cursor: pointer;
+  }
+}

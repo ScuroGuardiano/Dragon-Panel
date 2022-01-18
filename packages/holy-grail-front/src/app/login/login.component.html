@@ -1,0 +1,29 @@
+<div class="login-container">
+  <ngx-section sectionTitle="Login" [sectionCollapsible]="false" class="shadow" id="login">
+  <ngx-tip *ngIf="error" [status]="TipStatus.Error">
+    {{ error }}
+  </ngx-tip>
+  <form (submit)="login()">
+    <ngx-input
+      [type]="InputTypes.text"
+      [label]="'Username'"
+      [autofocus]="true"
+      [(ngModel)]="username"
+      [hint]="'Enter your username, default is admin'"
+      [required]="true"
+      name="username">
+    </ngx-input>
+
+    <ngx-input
+      [type]="InputTypes.password"
+      [label]="'Password'"
+      [(ngModel)]="password"
+      [hint]="'Enter your password'"
+      [required]="true"
+      name="password">
+    </ngx-input>
+
+    <input type="submit" class="btn btn-primary" value="Login" [disabled]="!canLogin">
+  </form>
+  </ngx-section>
+</div>

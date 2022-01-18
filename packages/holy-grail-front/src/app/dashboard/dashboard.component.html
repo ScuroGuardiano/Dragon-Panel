@@ -1,0 +1,6 @@
+<ngx-section [sectionCollapsible]="false" sectionTitle="Dashu-boardu" *ngIf="user">
+  <h2>Logged in as <b>{{ user.username }}</b></h2>
+  <button (click)="logout()" class="btn btn-primary large"><i class="ngx-icon ngx-arrow-tail-solid-left has-text">
+    </i> Wyloguj się w pizdu
+  </button>
+</ngx-section>
