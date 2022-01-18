@@ -19,4 +19,10 @@ export class AuthController {
     async me(@Request() req): Promise<IShittyUser> {
         return req.user;
     }
+
+    @UseGuards(JwtAuthGuard)
+    @Get('logout')
+    async logout(@Request() req) {
+        await this.authService.logout(req.headers.authorization.split(' ')[1]);
+    }
 }

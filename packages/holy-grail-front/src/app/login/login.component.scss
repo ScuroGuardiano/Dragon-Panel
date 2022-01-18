@@ -13,4 +13,7 @@
   input[type="submit"] {
     cursor: pointer;
   }
+  ngx-tip::ng-deep.tip-container {
+    margin-top: 1.8rem;
+  }
 }
