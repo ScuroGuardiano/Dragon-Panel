@@ -16,12 +16,13 @@ export class AppConfigService {
         }
 
         const readableConfig: IAppConfig = {};
+
         Object.keys(this.config).forEach(key => {
             const schemaEntry = appConfigSchema[key];
             if (schemaEntry && schemaEntry.readable) {
-                return readableConfig[key] = this.config[key];
+                readableConfig[key] = this.config[key];
             }
-            else {
+            else if(this.config[key]?.length > 0) {
                 readableConfig[key] = "[HIDDEN]"
             }
         });
@@ -29,7 +30,13 @@ export class AppConfigService {
         return readableConfig;
     }
 
-    public async getValue(key: string): Promise<string | null> {
+    public async setConfig(config: IAppConfig) {
+        await Promise.all(Object.keys(config).map(async key => {
+            await this.set(key, config[key]);
+        }));
+    }
+
+    public async get(key: string): Promise<string | null> {
         if(!this.config) {
             await this.loadConfig();
         }
@@ -46,7 +53,21 @@ export class AppConfigService {
         return null;
     }
 
-    public async setValue(key: string, value: string): Promise<void> {
+    public async set(key: string, value: string): Promise<boolean> {
+        if(!this.config) {
+            await this.loadConfig();
+        }
+
+        if (appConfigSchema[key] && appConfigSchema[key].writable) {
+            this.config[key] = value;
+            await this.appConfigRepository.save(AppConfig.fromConfigObject(this.config, appConfigSchema));
+            return true;
+        }
+
+        return false;
+    }
+
+    public async setNonWritable(key: string, value: string): Promise<void> {
         if(!this.config) {
             await this.loadConfig();
         }
@@ -56,9 +77,6 @@ export class AppConfigService {
 
     private async loadConfig(): Promise<void> {
         const configs = await this.appConfigRepository.find();
-        if(configs.length === 0) {
-            return;
-        }
         const config: IAppConfig = {};
         configs.forEach(c => {
             config[c.key] = c.value;

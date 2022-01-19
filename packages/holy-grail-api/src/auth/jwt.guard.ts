@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { firstValueFrom, Observable } from 'rxjs';
 import { AuthService } from './auth.service';
@@ -14,12 +14,12 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
         const request = context.switchToHttp().getRequest();
         const authHeader = request.headers.authorization;
         if (!authHeader) {
-            return false;
+            throw new UnauthorizedException();
         }
         const token = authHeader.split(' ')[1];
         const user = await this.authService.validateJWT(token);
         if (!user) {
-            return false;
+            throw new UnauthorizedException();
         }
         const result = super.canActivate(context);
         if (result instanceof Observable) {

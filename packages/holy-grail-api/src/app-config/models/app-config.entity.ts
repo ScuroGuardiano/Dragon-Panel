@@ -1,6 +1,6 @@
 import { AfterLoad, BeforeInsert, BeforeUpdate, Column, Entity, PrimaryColumn } from "typeorm";
 import { IAppConfig, IAppConfigSchema } from "../app-config.schema";
-import cryptoJS from 'crypto-js';
+import * as cryptoJS from 'crypto-js';
 
 @Entity()
 export default class AppConfig {

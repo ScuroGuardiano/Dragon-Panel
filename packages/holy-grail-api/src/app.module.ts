@@ -18,6 +18,6 @@ import { AppConfigModule } from './app-config/app-config.module';
     AppConfigModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 export class AppModule {}

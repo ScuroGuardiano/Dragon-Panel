@@ -19,6 +19,7 @@ import { ShittyStrategy } from './shitty.strategy';
       signOptions: { expiresIn: "1h" }
     }),
     TypeOrmModule.forFeature([RevokedJwt])
-  ]
+  ],
+  exports: [AuthService]
 })
 export class AuthModule {}
