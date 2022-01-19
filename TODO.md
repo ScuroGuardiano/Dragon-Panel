@@ -1,12 +1,12 @@
-[x] Create simple and shitty authentication  
-[x] Create configuration module  
-[ ] Config page on frontend  
-[ ] Setup step by step on first run on frontend  
-[ ] Check if encryption key is valid for keys in database.  
-[x] Make token revoking system  
-[ ] Create proper user system with roles, permissions that will replace this shitty authentication  
-[ ] More modular configuration. Modules should be able to register it's own config properties.  
-[ ] Domain management with Cloudflare  
-[ ] Proxy management with Caddy  
-[ ] Containers management using Portainer  
-[ ] Proxmox integration  
+- [x] Create simple and shitty authentication
+- [x] Create configuration module
+- [ ] Config page on frontend
+- [ ] Setup step by step on first run on frontend
+- [ ] Check if encryption key is valid for keys in database.
+- [x] Make token revoking system
+- [ ] Create proper user system with roles, permissions that will replace this shitty authentication
+- [ ] More modular configuration. Modules should be able to register it's own config properties.
+- [ ] Domain management with Cloudflare
+- [ ] Proxy management with Caddy
+- [ ] Containers management using Portainer
+- [ ] Proxmox integration
