@@ -38,7 +38,18 @@ export class AuthService {
     }
   }
 
-  logout() {
+  async logout() {
+    this.httpClient.delete('/api/auth/logout', {
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+      }
+    })
+    .toPromise().catch(err => {
+      // TODO: I think it should be considered as security risk
+      // Should I logout user in this case or return error?
+      console.error("Couldn't revoke JWT Token, backend returned error");
+      console.error(err);
+    });
     localStorage.removeItem('JWT_TOKEN');
     this.router.navigate(['/login']);
   }
