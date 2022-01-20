@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { NgxUIModule } from '@swimlane/ngx-ui';
+import { LayoutComponent } from './layout/layout.component';
 
 
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    LayoutComponent
   ],
   imports: [
     CommonModule,
