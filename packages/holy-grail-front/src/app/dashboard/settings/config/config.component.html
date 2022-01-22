@@ -1,0 +1,7 @@
+<ngx-section [sectionCollapsible]="false" sectionTitle="Config" class="shadow">
+  <ul>
+    <li *ngFor="let schemaEntry of appConfigSchema | keyvalue:onCompare">
+      {{ schemaEntry.key }} {{ schemaEntry.value.description }}
+    </li>
+  </ul>
+</ngx-section>

@@ -1,0 +1,70 @@
+<div class="navigation">
+  <ngx-nav-menu [expanded]="navExpanded" class="navigation">
+    <div class="nav-logo">
+      <h2 class="logo-image">{{logo}}</h2>
+      <ngx-icon *ngIf="!navExpanded" svgSrc="slide-right" (click)="navExpanded = true" class="expand-icon"></ngx-icon>
+      <ngx-icon *ngIf="navExpanded" svgSrc="slide-left" (click)="navExpanded = false" class="expand-icon"></ngx-icon>
+    </div>
+    <ul class="nav-items nav-main vertical-list ngx-scroll-muted">
+      <li *ngFor="let item of navigationTree; trackBy:trackByName" class="nav-item-container">
+        <a
+          *ngIf="!item.children"
+          class="nav-item"
+          ngx-tooltip
+          [tooltipPlacement]="$any('right')"
+          [tooltipTitle]="item.name"
+          routerLink="{{ item.route }}"
+          routerLinkActive="active"
+        >
+          <ngx-icon [fontIcon]="item.icon"></ngx-icon>
+          <span class="nav-label">{{ item.name }}</span>
+        </a>
+
+        <div
+          *ngIf="item.children"
+          class="nav-item"
+          ngx-tooltip
+          [tooltipContext]="item.children"
+          [tooltipCssClass]="'nav-popover'"
+          [tooltipType]="$any('popover')"
+          [tooltipPlacement]="$any('right')"
+          [tooltipTemplate]="$any(!navExpanded ? childrenTemplate : undefined)"
+          [tooltipShowCaret]="false"
+          [tooltipAlignment]="$any('top')"
+          [tooltipSpacing]="1"
+          (click)="item.expanded = !item.expanded"
+        >
+          <ngx-icon [fontIcon]="item.icon"></ngx-icon>
+          <span class="nav-label">{{ item.name }}</span>
+        </div>
+
+        <ng-template #childrenTemplate let-model="model">
+          <div class="title">{{ item.name }}</div>
+          <ul *ngIf="item.children" class="sub-nav ngx-scroll-muted">
+            <a
+              *ngFor="let child of item.children"
+              class="sub-nav-item"
+              routerLink="{{ child.route }}"
+              routerLinkActive="active"
+            >
+              <span class="subnav-label">{{ child.name }}</span>
+              <ngx-icon fontIcon="check" class="active-indicator"></ngx-icon>
+            </a>
+          </ul>
+        </ng-template>
+
+        <ul *ngIf="item.children && navExpanded" class="sub-nav ngx-scroll-muted">
+          <a
+            *ngFor="let child of item.children"
+            class="sub-nav-item"
+            routerLink="{{ child.route }}"
+            routerLinkActive="active"
+          >
+            <span class="subnav-label">{{ child.name }}</span>
+            <ngx-icon fontIcon="check" class="active-indicator"></ngx-icon>
+          </a>
+        </ul>
+      </li>
+    </ul>
+  </ngx-nav-menu>
+</div>

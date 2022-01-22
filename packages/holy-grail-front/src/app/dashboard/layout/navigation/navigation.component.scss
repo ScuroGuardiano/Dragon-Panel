@@ -1,0 +1,15 @@
+@import '@swimlane/ngx-ui/lib/styles/colors/variables';
+
+.navigation {
+  display: flex;
+  flex-shrink: 0;
+  position: relative;
+  top: 0;
+  left: 0;
+  overflow: auto;
+  height: 100%;
+
+  .logo-image {
+    text-align: center;
+  }
+}

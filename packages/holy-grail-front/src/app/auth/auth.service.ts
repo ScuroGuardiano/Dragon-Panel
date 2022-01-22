@@ -20,6 +20,14 @@ export class AuthService {
     return this.user ?? null;
   }
 
+  getToken() {
+    return localStorage.getItem('JWT_TOKEN');
+  }
+
+  async isTokenSet() {
+    return typeof localStorage.getItem('JWT_TOKEN') === 'string';
+  }
+
   async isLoggedIn() {
     const token = localStorage.getItem('JWT_TOKEN');
     if (!token) {
@@ -39,11 +47,7 @@ export class AuthService {
   }
 
   async logout() {
-    this.httpClient.delete('/api/auth/logout', {
-      headers: {
-        "Authorization": `Bearer ${localStorage.getItem('JWT_TOKEN')}`
-      }
-    })
+    this.httpClient.delete('/api/auth/logout')
     .toPromise().catch(err => {
       // TODO: I think it should be considered as security risk
       // Should I logout user in this case or return error?
@@ -55,11 +59,7 @@ export class AuthService {
   }
 
   private async loadUser(token: string): Promise<IUser | null> {
-    const user = await this.httpClient.get<IUser>('/api/auth/me', {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
+    const user = await this.httpClient.get<IUser>('/api/auth/me')
     .toPromise()
     .catch(err => {
       if (err.status && err.status === 401) {

@@ -9,7 +9,8 @@ import IUser from 'src/app/auth/user';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+  }
 
   user?: IUser | null;
 

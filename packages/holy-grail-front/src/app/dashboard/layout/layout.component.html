@@ -1,18 +1,24 @@
-<ngx-toolbar>
-  <ngx-toolbar-title>
-    <h1 class="site-title"><a [routerLink]="['']">The Holy Grail </a><small>v.0.1.0</small></h1>
-  </ngx-toolbar-title>
-  <ngx-toolbar-content>
-  <span class="logged-in-user" *ngIf="user">
-    <i class="ngx-icon ngx-user"></i>
-    {{ user?.username }}
-  </span>
-  <button (click)="logout()" class="btn btn-primary large">
-    Logout
-  </button>
-  </ngx-toolbar-content>
-</ngx-toolbar>
+<div class="app">
+  <app-navigation></app-navigation>
 
-<main>
-  <router-outlet></router-outlet>
-</main>
+  <div class="page">
+    <ngx-toolbar>
+      <ngx-toolbar-title>
+        <h1 class="site-title"><a [routerLink]="['']">The Holy Grail </a><small>v.0.1.0</small></h1>
+      </ngx-toolbar-title>
+      <ngx-toolbar-content>
+      <span class="logged-in-user" *ngIf="user">
+        <i class="ngx-icon ngx-user"></i>
+        {{ user?.username }}
+      </span>
+      <button (click)="logout()" class="btn btn-primary large">
+        Logout
+      </button>
+      </ngx-toolbar-content>
+    </ngx-toolbar>
+
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
