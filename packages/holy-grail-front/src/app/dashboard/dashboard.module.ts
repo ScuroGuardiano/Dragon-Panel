@@ -7,6 +7,7 @@ import { NgxUIModule } from '@swimlane/ngx-ui';
 import { NavigationComponent } from './layout/navigation/navigation.component';
 import { DomainComponent } from './domain/domain.component';
 import { ConfigComponent } from './settings/config/config.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -21,7 +22,8 @@ import { ConfigComponent } from './settings/config/config.component';
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    NgxUIModule
+    NgxUIModule,
+    FormsModule
   ]
 })
 export class DashboardModule { }

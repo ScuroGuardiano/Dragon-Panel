@@ -1,7 +1,30 @@
 <ngx-section [sectionCollapsible]="false" sectionTitle="Config" class="shadow">
-  <ul>
-    <li *ngFor="let schemaEntry of appConfigSchema | keyvalue:onCompare">
-      {{ schemaEntry.key }} {{ schemaEntry.value.description }}
+  <ul *ngIf="appConfigSchema && modifiedConfig">
+    <li
+      *ngFor="let schemaEntry of appConfigSchema | keyvalue:onCompare"
+      [ngSwitch]="schemaEntry.value.type">
+
+      <ng-container *ngSwitchCase="'boolean'">
+        <ngx-toggle
+          [disabled]="!schemaEntry.value.writable"
+          [label]="schemaEntry.key"
+          [(ngModel)]="modifiedConfig![schemaEntry.key]">
+        </ngx-toggle>
+        <small>{{ schemaEntry.value.description }}</small>
+      </ng-container>
+
+      <ng-container *ngSwitchDefault>
+        <ngx-input
+          [type]="schemaEntryToNgxInputType(schemaEntry.value)"
+          [disabled]="!schemaEntry.value.writable"
+          [label]="schemaEntry.key"
+          [hint]="schemaEntry.value.description ?? ''"
+          [(ngModel)]="modifiedConfig![schemaEntry.key]">
+        </ngx-input>
+      </ng-container>
     </li>
   </ul>
+
+  <button (click)="save()" class="btn btn-primary large save-btn" [disabled]="!hasConfigChanged">Save</button>
+  <button (click)="discard()" class="btn btn-danger large discard-btn" [disabled]="!hasConfigChanged">Discard</button>
 </ngx-section>

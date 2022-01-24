@@ -59,8 +59,12 @@ export class AppConfigService {
         }
 
         if (appConfigSchema[key] && appConfigSchema[key].writable) {
+            if (this.config[key]) {
+                await this.appConfigRepository.update({ key }, AppConfig.fromKeyValue(key, value, appConfigSchema[key].encrypted ?? false));
+            } else {
+                await this.appConfigRepository.save(AppConfig.fromKeyValue(key, value, appConfigSchema[key].encrypted ?? false));
+            }
             this.config[key] = value;
-            await this.appConfigRepository.save(AppConfig.fromConfigObject(this.config, appConfigSchema));
             return true;
         }
 
