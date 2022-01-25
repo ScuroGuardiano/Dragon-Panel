@@ -1,6 +1,6 @@
 - [x] Create simple and shitty authentication
 - [x] Create configuration module
-- [ ] Config page on frontend
+- [x] Config page on frontend
 - [ ] Setup step by step on first run on frontend
 - [ ] Check if encryption key is valid for keys in database.
 - [x] Make token revoking system
@@ -8,7 +8,7 @@
 - [ ] More modular configuration. Modules should be able to register it's own config properties.
 - [x] Domain management with Cloudflare
 - [ ] Test and fix bugs in domain management ^^
-- [ ] Add proper error handling to CloudflareProvider and domain management
+- [x] Add proper error handling to CloudflareProvider and domain management
 - [ ] Domain management site on frontend
 - [ ] Proxy management with Caddy
 - [ ] Containers management using Portainer
