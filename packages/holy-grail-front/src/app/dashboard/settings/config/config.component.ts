@@ -22,7 +22,7 @@ export class ConfigComponent implements OnInit {
   modifiedConfig?: IAppConfig;
 
   onCompare(_left: KeyValue<any, any>, _right: KeyValue<any, any>): number {
-    return -1;
+    return 0;
   }
 
   discard() {
