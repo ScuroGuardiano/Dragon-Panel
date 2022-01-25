@@ -27,6 +27,7 @@
     "@nestjs/passport": "^8.1.0",
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/typeorm": "^8.0.3",
+    "cross-fetch": "^3.1.5",
     "crypto-js": "^4.1.1",
     "dotenv": "^12.0.4",
     "passport": "^0.5.2",

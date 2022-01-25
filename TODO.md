@@ -6,7 +6,10 @@
 - [x] Make token revoking system
 - [ ] Create proper user system with roles, permissions that will replace this shitty authentication
 - [ ] More modular configuration. Modules should be able to register it's own config properties.
-- [ ] Domain management with Cloudflare
+- [x] Domain management with Cloudflare
+- [ ] Test and fix bugs in domain management ^^
+- [ ] Add proper error handling to CloudflareProvider and domain management
+- [ ] Domain management site on frontend
 - [ ] Proxy management with Caddy
 - [ ] Containers management using Portainer
 - [ ] Proxmox integration

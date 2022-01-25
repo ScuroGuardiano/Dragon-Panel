@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { AppConfigModule } from './app-config/app-config.module';
+import { DomainsModule } from './domains/domains.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { AppConfigModule } from './app-config/app-config.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    AppConfigModule
+    AppConfigModule,
+    DomainsModule
   ],
   controllers: [AppController],
   providers: [AppService]

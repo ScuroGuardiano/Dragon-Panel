@@ -11,6 +11,7 @@ import { AuthModule } from 'src/auth/auth.module';
   imports: [
     AuthModule,
     TypeOrmModule.forFeature([AppConfig])
-  ]
+  ],
+  exports: [AppConfigService]
 })
 export class AppConfigModule {}
