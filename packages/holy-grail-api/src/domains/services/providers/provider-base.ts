@@ -5,6 +5,7 @@ import IDomain from '../interfaces/domain';
 
 export abstract class ProviderBase {
   constructor(protected appConfigService: AppConfigService) {}
+  abstract get name(): string;
   abstract canConnect(): Promise<boolean>;
   abstract listDomains(): Promise<IDomain[]>;
   abstract listDNSRecords(domainId: string): Promise<IDNSRecord[]>;

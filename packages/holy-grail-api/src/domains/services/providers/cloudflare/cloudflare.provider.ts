@@ -13,6 +13,10 @@ export default class CloudflareProvider extends ProviderBase {
   private http = new CloudflareHttpClient(this.appConfigService);
   private errorHandler = new CloudflareErrorHandler();
 
+  get name() {
+    return "CLOUDFLARE";
+  }
+
   async canConnect(): Promise<boolean> {
     const response = await this.http.get('https://api.cloudflare.com/client/v4/user/tokens/verify');
     return await this.verifyResponse(response);
