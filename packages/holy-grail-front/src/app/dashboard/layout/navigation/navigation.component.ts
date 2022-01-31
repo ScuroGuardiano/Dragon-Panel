@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomainService } from '../../domain/domain.service';
 
 interface INavigationTreeElementBase {
   name: string;
@@ -22,7 +23,19 @@ interface INavigationTreeElement extends INavigationTreeElementBase {
 })
 export class NavigationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private domainService: DomainService) { }
+
+  async ngOnInit(): Promise<void> {
+    const domains = await this.domainService.getDomainList();
+    this.domainsRoutes.push(...domains.map(domain => {
+      return {
+        name: domain.name,
+        route: `domain/${domain.id}`
+      }
+    }));
+  }
+
+  domainsRoutes: INavigationTreeElementChild[] = [];
 
   navExpanded = true;
 
@@ -36,16 +49,7 @@ export class NavigationComponent implements OnInit {
       name: "Domain",
       icon: "domain",
       route: "domain",
-      children: [
-        {
-          name: "scuroguardiano.net",
-          route: "domain/scuroguardiano.net"
-        },
-        {
-          name: "darkentity.net",
-          route: "domain/darkentity.net"
-        }
-      ]
+      children: this.domainsRoutes
     },
     {
       name: "Proxy",
@@ -84,9 +88,6 @@ export class NavigationComponent implements OnInit {
 
   trackByName(_index: number, item: any): string {
     return item.name;
-  }
-
-  ngOnInit(): void {
   }
 
 }

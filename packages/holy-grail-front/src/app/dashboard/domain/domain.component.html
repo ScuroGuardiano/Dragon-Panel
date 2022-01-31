@@ -1,3 +1,22 @@
-<ngx-section sectionTitle="Domain scuroguardiano.net" [sectionCollapsible]="false" class="shadow">
+<ngx-section [sectionTitle]="pageTitle" [sectionCollapsible]="false" class="shadow">
   <h1>Zaczyna to jakoś wyglądać 🥺🥺</h1>
+  <h2>DNS Records</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Record</th>
+        <th>Type</th>
+        <th>Content</th>
+        <th>TTL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of dnsRecords">
+        <td>{{ record.name }}</td>
+        <td>{{ record.type }}</td>
+        <td>{{ record.content }}</td>
+        <td>{{ record.ttl === 1 ? "auto" : record.ttl }}</td>
+      </tr>
+    </tbody>
+  </table>
 </ngx-section>
