@@ -1,4 +1,5 @@
 import { AppConfigService } from "src/app-config/app-config.service";
+import { fetch } from 'cross-fetch';
 
 export default class CloudflareHttpClient {
   constructor(private appConfigService: AppConfigService) {}
