@@ -1,5 +1,9 @@
 <ngx-section [sectionTitle]="pageTitle" [sectionCollapsible]="false" class="shadow">
-  <h1>Zaczyna to jakoś wyglądać 🥺🥺</h1>
+  <app-add-record
+    (recordAdded)="onRecordAdded()"
+    [domainName]="domainName!"
+    [domainId]="domainId!"
+  ></app-add-record>
   <h2>DNS Records</h2>
   <table class="table">
     <thead>
@@ -8,6 +12,7 @@
         <th>Type</th>
         <th>Content</th>
         <th>TTL</th>
+        <th>Options</th>
       </tr>
     </thead>
     <tbody>
@@ -16,6 +21,14 @@
         <td>{{ record.type }}</td>
         <td>{{ record.content }}</td>
         <td>{{ record.ttl === 1 ? "auto" : record.ttl }}</td>
+        <td class="record-options">
+          <button (click)="deleteRecordHandler(record)" class="btn btn-danger large">
+            <ngx-icon fontIcon="trash"></ngx-icon>
+          </button>
+          <button (click)="editRecordHandler(record)" class="btn btn-warning large">
+            <ngx-icon fontIcon="edit"></ngx-icon>
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

@@ -8,6 +8,7 @@ import { NavigationComponent } from './layout/navigation/navigation.component';
 import { DomainComponent } from './domain/domain.component';
 import { ConfigComponent } from './settings/config/config.component';
 import { FormsModule } from '@angular/forms';
+import { AddRecordComponent } from './domain/add-record/add-record.component';
 
 
 
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     LayoutComponent,
     NavigationComponent,
     DomainComponent,
-    ConfigComponent
+    ConfigComponent,
+    AddRecordComponent
   ],
   imports: [
     CommonModule,

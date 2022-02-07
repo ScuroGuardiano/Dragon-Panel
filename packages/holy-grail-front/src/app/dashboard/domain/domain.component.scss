@@ -1,0 +1,11 @@
+table {
+  td {
+    vertical-align: middle;
+  }
+  .record-options {
+    //display: flex;
+    button:first-child {
+      margin-right: .5rem;
+    }
+  }
+}

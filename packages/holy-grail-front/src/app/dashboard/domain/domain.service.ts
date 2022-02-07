@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { IDNSRecordCreate } from './interfaces/dns-dtos';
 import IDNSRecord from './interfaces/dns-record';
 import IDomain from './interfaces/domain';
 
@@ -9,6 +10,8 @@ import IDomain from './interfaces/domain';
 export class DomainService {
 
   constructor(private httpClient: HttpClient) { }
+
+  private supportedRecordTypes = ['A', 'AAAA', 'CNAME'];
 
   private domains: IDomain[] = [];
 
@@ -30,6 +33,14 @@ export class DomainService {
 
   async getDNSRecords(domainId: string): Promise<IDNSRecord[]> {
     const records = await this.httpClient.get<IDNSRecord[]>(`/api/domains/${domainId}`).toPromise();
-    return records;
+    return records.filter(record => this.supportedRecordTypes.includes(record.type));
+  }
+
+  async deleteDNSRecord(domainId: string, recordId: string): Promise<void> {
+    await this.httpClient.delete<void>(`/api/domains/${domainId}/${recordId}`).toPromise();
+  }
+
+  async addDNSRecord(domainId: string, record: IDNSRecordCreate): Promise<IDNSRecord> {
+    return this.httpClient.post<IDNSRecord>(`/api/domains/${domainId}`, record).toPromise();
   }
 }

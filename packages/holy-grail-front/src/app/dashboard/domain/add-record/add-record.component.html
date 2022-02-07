@@ -1,0 +1,39 @@
+<ngx-section sectionTitle="Add record" class="outline" [sectionCollapsed]="true">
+  <form>
+    <div class="domain-form">
+      <ngx-input
+        name="recordName"
+        [required]="true"
+        label="Subdomain name"
+        [(ngModel)]="recordName">
+        <ngx-input-suffix>.{{ domainName }}</ngx-input-suffix>
+      </ngx-input>
+
+      <ngx-select
+        name="recordType"
+        [(ngModel)]="_recordType"
+        label="Record type"
+        [required]="true"
+        [filterable]="false"
+        [allowClear]="false"
+        >
+        <ngx-select-option
+          *ngFor="let TYPE of RECORD_TYPES"
+          [value]="TYPE"
+          [name]="TYPE">
+        </ngx-select-option>
+      </ngx-select>
+
+      <ngx-input
+        name="recordContent"
+        [required]="true"
+        label="IP or alias"
+        [(ngModel)]="recordContent"></ngx-input>
+    </div>
+
+
+    <button (click)="addRecord()" class="btn btn-primary large">
+      <ngx-icon fontIcon="add-circle-medium"></ngx-icon> Add record
+    </button>
+  </form>
+</ngx-section>
