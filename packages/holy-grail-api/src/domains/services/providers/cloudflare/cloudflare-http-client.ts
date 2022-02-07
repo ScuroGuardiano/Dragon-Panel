@@ -27,9 +27,9 @@ export default class CloudflareHttpClient {
   private async requestWithBody(url: string, method: "PUT" | "PATCH" | "POST", body: any): Promise<Response> {
     const res = await fetch(url, {
       method,
-      body,
+      body: JSON.stringify(body),
       headers: {
-        'Content-Type': "application/json",
+        'Content-type': "application/json",
         'Authorization': `Bearer ${await this.appConfigService.get('CF_API_KEY')}`
       }
     });
@@ -41,7 +41,7 @@ export default class CloudflareHttpClient {
     const res = await fetch(url, {
       method,
       headers: {
-        'Content-Type': "application/json",
+        'Content-type': "application/json",
         'Authorization': `Bearer ${await this.appConfigService.get('CF_API_KEY')}`
       }
     });
