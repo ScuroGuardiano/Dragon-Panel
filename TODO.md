@@ -12,7 +12,8 @@
 - [x] Add proper error handling to CloudflareProvider and domain management
 - [ ] Handle DNS records pagination correctly
 - [ ] Make support for only 3 types or records - A, AAAA, CNAME. This project is not Cloudflare Dash replacement.
-- [ ] Domain management site on frontend
+- [x] Domain management site on frontend (well almost)
+- [ ] Cloudflare provider is not returning correct errors, like when record already exists. Need to fix that.
 - [ ] Proxy management with Caddy
 - [ ] Containers management using Portainer
 - [ ] Proxmox integration
