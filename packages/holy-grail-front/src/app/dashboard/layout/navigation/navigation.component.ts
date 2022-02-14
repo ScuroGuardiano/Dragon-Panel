@@ -83,7 +83,7 @@ export class NavigationComponent implements OnInit {
   ];
 
   get logo() {
-    return this.navExpanded ? "Holy Grail" : "HG";
+    return this.navExpanded ? "Dragon Panel" : "DP";
   }
 
   trackByName(_index: number, item: any): string {
