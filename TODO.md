@@ -15,6 +15,7 @@
 - [x] Domain management site on frontend (well almost)
 - [ ] Cloudflare provider is not returning correct errors, like when record already exists. Need to fix that.
 - [ ] Proxy management with Caddy
+- [ ] Support for basic auth with Caddy
 - [ ] Containers management using Portainer
 - [ ] Proxmox integration
 

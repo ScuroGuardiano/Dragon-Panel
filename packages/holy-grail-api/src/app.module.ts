@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { AppConfigModule } from './app-config/app-config.module';
 import { DomainsModule } from './domains/domains.module';
+import { ProxyModule } from './proxy/proxy.module';
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { DomainsModule } from './domains/domains.module';
       synchronize: true,
     }),
     AppConfigModule,
-    DomainsModule
+    DomainsModule,
+    ProxyModule
   ],
   controllers: [AppController],
   providers: [AppService]
