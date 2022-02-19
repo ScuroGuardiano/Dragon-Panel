@@ -4,10 +4,11 @@ import { DomainService } from '../../domain/domain.service';
 interface INavigationTreeElementBase {
   name: string;
   expanded?: boolean;
+  external?: string;
 }
 
 interface INavigationTreeElementChild extends INavigationTreeElementBase {
-  route: string;
+  route?: string;
 }
 
 interface INavigationTreeElement extends INavigationTreeElementBase {
@@ -79,6 +80,11 @@ export class NavigationComponent implements OnInit {
           route: "settings/permisions"
         }
       ]
+    },
+    {
+      name: "Source code",
+      icon: "html-code",
+      external: "https://github.com/ScuroGuardiano/Holy-Grail"
     }
   ];
 
