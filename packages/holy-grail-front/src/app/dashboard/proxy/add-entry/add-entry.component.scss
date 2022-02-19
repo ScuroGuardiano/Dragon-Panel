@@ -1,0 +1,8 @@
+.new-entry-dialog {
+  min-width: 400px;
+  .add-entry {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

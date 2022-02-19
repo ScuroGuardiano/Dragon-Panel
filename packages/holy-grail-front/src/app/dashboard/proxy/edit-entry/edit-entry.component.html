@@ -1,0 +1,8 @@
+<div class="new-entry-dialog">
+  <ngx-input [(ngModel)]="matcher" [required]="true" label="matcher" hint="Domain or path on which entry will be accessed."></ngx-input>
+  <ngx-input [(ngModel)]="to" [required]="true" label="to" hint="Proxy destination host:port"></ngx-input>
+  <div class="buttons">
+    <button [disabled]="!valid" class="btn btn-primary large add-entry">Save</button>
+    <button (click)="cancel()" class="btn btn-warning large">Cancel</button>
+  </div>
+</div>

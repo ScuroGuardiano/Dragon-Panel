@@ -1,0 +1,38 @@
+<ng-template #editTmpl let-context="context">
+  <app-edit-entry [entry]="context.entry" [dialog]="context.dialog"></app-edit-entry>
+</ng-template>
+
+<ngx-section sectionTitle="Proxy" [sectionCollapsible]="false">
+  <p class="proxy-info">
+    <span class="proxy-info-entry">Backend: {{ backend }}</span>
+    <span class="proxy-info-entry">
+      Status: <span [class]="'status-' + status">{{ status }}</span>
+    </span>
+  </p>
+  <hr>
+  <app-add-entry></app-add-entry>
+  <ul>
+    <li *ngFor="let entry of proxyEntries">
+      <ngx-card [status]="$any(entryStatus(entry) | async)" [hideAccent]="true">
+        <ngx-card-header>
+          <ngx-card-avatar>PB95</ngx-card-avatar>
+          <ngx-card-title><a [href]="'http://' + entry.matcher">{{ entry.matcher }}</a></ngx-card-title>
+          <ngx-card-subtitle>
+            {{ entry.matcher }} &RightArrow; {{ entry.to }}
+          </ngx-card-subtitle>
+        </ngx-card-header>
+        <ngx-card-section>
+          <ngx-toggle label="Enabled" [ngModel]="entry.enabled" (click)="enableDisableEntry($event, entry)"></ngx-toggle>
+        </ngx-card-section>
+        <ngx-card-section class="entry-options">
+          <button (click)="deleteEntryHandler(entry)" class="btn btn-danger large">
+            <ngx-icon fontIcon="trash"></ngx-icon>
+          </button>
+          <button (click)="edit(entry)" class="btn btn-warning large">
+            <ngx-icon fontIcon="edit"></ngx-icon>
+          </button>
+        </ngx-card-section>
+      </ngx-card>
+    </li>
+  </ul>
+</ngx-section>

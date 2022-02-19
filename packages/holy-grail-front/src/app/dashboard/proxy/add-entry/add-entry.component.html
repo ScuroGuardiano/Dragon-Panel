@@ -1,0 +1,11 @@
+<button (click)="newEntry()" class="btn btn-primary large">
+  <ngx-icon fontIcon="add-circle-medium"></ngx-icon> New entry
+</button>
+
+<ng-template #newEntryTmpl>
+  <div class="new-entry-dialog">
+    <ngx-input [(ngModel)]="matcher" [required]="true" label="matcher" hint="Domain or path on which entry will be accessed."></ngx-input>
+    <ngx-input [(ngModel)]="to" [required]="true" label="to" hint="Proxy destination host:port"></ngx-input>
+    <button [disabled]="!valid" class="btn btn-primary large add-entry">Add entry</button>
+  </div>
+</ng-template>

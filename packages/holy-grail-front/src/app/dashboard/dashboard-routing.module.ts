@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { DomainComponent } from './domain/domain.component';
 import { LayoutComponent } from './layout/layout.component';
+import { ProxyComponent } from './proxy/proxy.component';
 import { ConfigComponent } from './settings/config/config.component';
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
         component: ConfigComponent
       }
     ]
+  },
+  {
+    path: 'proxy',
+    component: ProxyComponent
   }
 ];
 

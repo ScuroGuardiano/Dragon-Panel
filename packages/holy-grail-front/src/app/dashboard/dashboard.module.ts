@@ -9,6 +9,9 @@ import { DomainComponent } from './domain/domain.component';
 import { ConfigComponent } from './settings/config/config.component';
 import { FormsModule } from '@angular/forms';
 import { AddRecordComponent } from './domain/add-record/add-record.component';
+import { ProxyComponent } from './proxy/proxy.component';
+import { AddEntryComponent } from './proxy/add-entry/add-entry.component';
+import { EditEntryComponent } from './proxy/edit-entry/edit-entry.component';
 
 
 
@@ -19,7 +22,10 @@ import { AddRecordComponent } from './domain/add-record/add-record.component';
     NavigationComponent,
     DomainComponent,
     ConfigComponent,
-    AddRecordComponent
+    AddRecordComponent,
+    ProxyComponent,
+    AddEntryComponent,
+    EditEntryComponent
   ],
   imports: [
     CommonModule,
