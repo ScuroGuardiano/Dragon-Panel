@@ -42,3 +42,20 @@ export interface CaddyRouteMatch extends CaddyType {
 export interface CaddyUpstream extends CaddyType {
   dial: string;
 }
+
+export interface CaddyManagedProxyRoute {
+  '@id': string;
+  handle: {
+    handler: "subroute"
+    routes: {
+      handle: {
+        handler: "reverse_proxy",
+        upstreams: {
+          dial: string
+        }[]
+      }[]
+    }[]
+  }[],
+  match: CaddyRouteMatch[],
+  terminal: true
+}

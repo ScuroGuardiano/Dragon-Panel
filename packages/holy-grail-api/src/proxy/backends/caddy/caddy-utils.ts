@@ -1,6 +1,6 @@
 import { Logger } from "@nestjs/common";
 import { inspect } from "util";
-import { CaddyReverseProxyHandle, CaddyRoute, CaddyRouteMatch, CaddyServers, CaddySubrouteHandle } from "./caddy-interfaces";
+import { CaddyManagedProxyRoute, CaddyReverseProxyHandle, CaddyRoute, CaddyRouteMatch, CaddyServers, CaddySubrouteHandle } from "./caddy-interfaces";
 
 export enum CaddyHandlerType {
   SUBROUTE = "subroute",
@@ -8,29 +8,67 @@ export enum CaddyHandlerType {
 }
 
 export interface ICaddyReverseProxyEntry {
+  id?: string;
+  managed?: boolean;
   server?: string;
   match: string;
   upstreams: string[];
 }
 
-// TODO: make method for finding proxy entries managed by Dragon Panel. I will use @id for it.
-
 export default class CaddyUtils {
   logger = new Logger("Caddy Utils");
+
+  readonly ID_PREFIX = 'uwu'; // So I can identify Dragon Panel managed entries
 
   /**
    * Flattens caddy servers config
    * 
-   * @see {@link CaddyUtils.parseRoute}
+   * Will return only entries **managed** by the Dragon Panel.
+   * Using much simpler, faster and more reliable method than getting unmanaged.
    * @param servers 
-   * @returns 
    */
-  proxyEntriesFromServers(servers: CaddyServers): ICaddyReverseProxyEntry[] {
+  managedProxyEntriesFromServers(servers: CaddyServers): ICaddyReverseProxyEntry[] {
     const entries = [] as ICaddyReverseProxyEntry[];
 
     Object.keys(servers).forEach(serverName => {
       const server = servers[serverName];
-      server.routes.forEach(route => {
+      server.routes
+        .filter(route => this.isManaged(route))
+        .forEach(route => {
+          try {
+            const parsed = this.parseManagedProxyRoute(route as CaddyManagedProxyRoute);
+            parsed.server = serverName;
+            entries.push(parsed);
+          }
+          catch (err) {
+            this.logger.error(`Error while parsing route ${inspect(route)}`);
+            this.logger.error(err);
+          }
+        });
+    });
+
+    return entries;
+  }
+
+  /**
+   * Flattens caddy servers config
+   * 
+   * Will return only entries **unmanaged** by the Dragon Panel.  
+   * Using a little bit complex method to get them and can be buggy for some cases.
+   * Sorry!
+   * 
+   * @see {@link CaddyUtils.parseRoute} for description of how data is parsed
+   * @param servers 
+   * @returns 
+   */
+  unmanagedProxyEntriesFromServers(servers: CaddyServers): ICaddyReverseProxyEntry[] {
+    const entries = [] as ICaddyReverseProxyEntry[];
+
+    Object.keys(servers).forEach(serverName => {
+      const server = servers[serverName];
+      server.routes
+      .filter(route => !this.isManaged(route))
+      .forEach(route => {
         try {
           entries.push(...this.parseRoute(route).map(entry => {
             return { ...entry, server: serverName }
@@ -120,6 +158,58 @@ export default class CaddyUtils {
     });
 
     return entries;
+  }
+
+  createProxyRoute(id: string, match: string, upstream: string): CaddyRoute {
+    const url = new URL('https://' + match);
+    const host = url.host;
+    const path = url.pathname;
+
+    return {
+      '@id': `${this.ID_PREFIX}::${id}`,
+      handle: [
+        {
+          handler: "subroute",
+          routes: [{
+            handle: [
+              {
+                handler: "reverse_proxy",
+                upstreams: [{
+                  dial: upstream
+                }]
+              } as CaddyReverseProxyHandle
+            ]
+          }]
+        } as CaddySubrouteHandle
+      ],
+      match: [
+        { 
+          host: [ host ],
+          path: [ path ]
+        }
+      ],
+      terminal: true
+    }
+  }
+
+  parseManagedProxyRoute(route: CaddyManagedProxyRoute): ICaddyReverseProxyEntry {
+    if (!this.isManaged(route)) {
+      throw new Error(`Route ${inspect(route)} is not managed route!`);
+    }
+
+    const match = this.joinMatch(route.match[0]);
+    const upstream = route.handle[0].routes[0].handle[0].upstreams[0].dial;
+
+    return {
+      id: route["@id"],
+      match,
+      upstreams: [ upstream ],
+      managed: true
+    }
+  }
+
+  isManaged(route: CaddyRoute) {
+    return route["@id"] && route["@id"].startsWith(this.ID_PREFIX);
   }
 
   private joinMatch(match: CaddyRouteMatch): string {
