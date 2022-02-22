@@ -1,4 +1,5 @@
 import { Logger } from "@nestjs/common";
+import { nanoid } from "nanoid";
 import { inspect } from "util";
 import { CaddyManagedProxyRoute, CaddyReverseProxyHandle, CaddyRoute, CaddyRouteMatch, CaddyServers, CaddySubrouteHandle } from "./caddy-interfaces";
 
@@ -160,13 +161,13 @@ export default class CaddyUtils {
     return entries;
   }
 
-  createProxyRoute(id: string, match: string, upstream: string): CaddyRoute {
+  createProxyRoute(match: string, upstream: string, id = `${this.ID_PREFIX}::${nanoid()}`): CaddyRoute {
     const url = new URL('https://' + match);
     const host = url.host;
     const path = url.pathname;
 
     return {
-      '@id': `${this.ID_PREFIX}::${id}`,
+      '@id': id,
       handle: [
         {
           handler: "subroute",
@@ -212,6 +213,11 @@ export default class CaddyUtils {
     return route["@id"] && route["@id"].startsWith(this.ID_PREFIX);
   }
 
+  findByMatch(servers: CaddyServers, match: string): ICaddyReverseProxyEntry {
+    const entries = [...this.managedProxyEntriesFromServers(servers), ...this.unmanagedProxyEntriesFromServers(servers)];
+    return entries.find(entry => entry.match === match);
+  }
+  
   private joinMatch(match: CaddyRouteMatch): string {
     return (match.host?.join('') ?? '') + (match.path?.join('') ?? '');
   }

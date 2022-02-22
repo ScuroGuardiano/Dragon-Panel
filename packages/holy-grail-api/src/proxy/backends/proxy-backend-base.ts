@@ -8,9 +8,13 @@ export default abstract class ProxyBackendBase {
   constructor(protected config: AppConfigService) {}
 
   abstract isAccessible(): Promise<boolean>;
-  abstract getEntries(): Promise<IProxyEntry[]>;
+  abstract getManagedEntries(): Promise<IProxyEntry[]>;
+  abstract getUnmanagedEntries(): Promise<IProxyEntry[]>;
+  abstract getManagedEntryById(id: string): Promise<IProxyEntry>;
   abstract details(): IProxyBackend;
-  abstract addEntry(entry: IProxyAddEntry): Promise<IProxyEntry>;
+  abstract createEntry(entry: IProxyAddEntry): IProxyEntry;
+  abstract addEntry(entry: IProxyEntry): Promise<IProxyEntry>;
+  abstract entryExists(id: string): Promise<boolean>;
   // Throw for error uwu
   abstract deleteEntry(id: string): Promise<void>;
   abstract modifyEntry(id: string, entry: IProxyModifyEntry): Promise<IProxyEntry>;

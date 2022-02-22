@@ -1,5 +1,5 @@
 export default interface IProxyModifyEntry {
   matcher?: string;
-  to?: string;
+  upstreams?: string[];
   enabled?: boolean;
 }

@@ -9,6 +9,6 @@ describe("CaddyUtils", () => {
   const caddyUtils = new CaddyUtils();
 
   it("Parses caddy servers json config", () => {
-    console.log(caddyUtils.proxyEntriesFromServers(JSON.parse(serversJson)));
+    console.log(caddyUtils.unmanagedProxyEntriesFromServers(JSON.parse(serversJson)));
   });
 });

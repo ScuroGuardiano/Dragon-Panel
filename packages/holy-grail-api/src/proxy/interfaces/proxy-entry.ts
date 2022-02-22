@@ -1,7 +1,8 @@
 export default interface IProxyEntry {
   id: string;
   matcher: string;
-  to: string;
+  upstreams: string[];
   enabled: boolean;
   url?: string;
+  activatedInProxy?: boolean;
 }
