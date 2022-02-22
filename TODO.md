@@ -26,3 +26,4 @@
 
 ### Optional
 - [ ] Support for NGINX as Reverse Proxy
+- [ ] Migrate to got HTTP client maybe... [https://github.com/sindresorhus/got](https://github.com/sindresorhus/got)
