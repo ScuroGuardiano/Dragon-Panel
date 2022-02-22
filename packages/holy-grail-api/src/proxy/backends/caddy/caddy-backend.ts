@@ -2,6 +2,7 @@ import { Logger } from "@nestjs/common";
 import BackendReturned4xxError from "src/proxy/errors/backend-returned-4xx";
 import BackendReturned5xxError from "src/proxy/errors/backend-returned-5xx";
 import BackendTimeoutError from "src/proxy/errors/backend-timeout";
+import BackendUnauthorizedError from "src/proxy/errors/backend-unauthorized";
 import DuplicateMatcherError from "src/proxy/errors/duplicate-matcher";
 import EntryNotFoundError from "src/proxy/errors/entry-not-found";
 import IProxyAddEntry from "src/proxy/interfaces/proxy-add-entry";
@@ -9,6 +10,7 @@ import ProxyBackend from "src/proxy/interfaces/proxy-backend";
 import IProxyEntry from "src/proxy/interfaces/proxy-entry";
 import ProxyEntry from "src/proxy/interfaces/proxy-entry";
 import ProxyModifyEntry from "src/proxy/interfaces/proxy-modify-entry";
+import { inspect } from "util";
 import ProxyBackendBase from "../proxy-backend-base";
 import CaddyHttpClient from "./caddy-http-client";
 import { CaddyManagedProxyRoute, CaddyRoute, CaddyServers } from "./caddy-interfaces";
@@ -171,13 +173,12 @@ export default class CaddyBackend extends ProxyBackendBase {
       return servers;
     }
     catch (err) {
-      this.logger.error(err);
       this.handleCommonError(err);
     }
   }
 
   handleCommonError(err: any) {
-    this.logger.error(err, err.stack);
+    this.logger.error(inspect(err));
 
     if (err.type && err.type === "aborted") {
       throw new BackendTimeoutError(this.details().id);
@@ -188,6 +189,10 @@ export default class CaddyBackend extends ProxyBackendBase {
     }
 
     if (err.status && err.status >= 400 && err.status <= 499) {
+      if (err.status === 401) {
+        throw new BackendUnauthorizedError(this.details().id);
+      }
+
       throw new BackendReturned4xxError(this.details().id, err);
     }
 

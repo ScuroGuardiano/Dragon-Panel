@@ -77,7 +77,7 @@ export class ProxyComponent implements OnInit, OnDestroy {
     }
 
     // TODO: Check entry health and return success or error
-    return of("success");
+    return of("error");
   }
 
   async enableDisableEntry(event: Event, entry: IProxyEntry) {

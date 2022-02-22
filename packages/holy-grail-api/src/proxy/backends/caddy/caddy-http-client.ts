@@ -7,7 +7,7 @@ export default class CaddyHttpClient {
   private async getAuth(): Promise<string> {
     const username = await this.appConfigService.get('CADDY_USERNAME');
     const password = await this.appConfigService.get('CADDY_PASSWORD');
-    const authBase64 = Buffer.from(`${username} ${password}`).toString('base64');
+    const authBase64 = Buffer.from(`${username}:${password}`).toString('base64');
     return `Basic ${authBase64}`;
   }
 
@@ -41,6 +41,10 @@ export default class CaddyHttpClient {
       }
     });
 
+    if (res.status >= 400 && res.status <= 599) {
+      throw res; // Throw error for error response, coz this is what I expected the fuck
+    }
+
     return res;
   }
 
@@ -52,6 +56,10 @@ export default class CaddyHttpClient {
         'Authorization': await this.getAuth()
       }
     });
+
+    if (res.status >= 400 && res.status <= 599) {
+      throw res; // Throw error for error response, coz this is what I expected the fuck
+    }
 
     return res;
   }
