@@ -1,5 +1,8 @@
 <h1 align="center">Holy Grail</h1>
 
+[![Visits Badge](https://badges.pufler.dev/visits/ScuroGuardiano/Holy-Grail)](https://badges.pufler.dev)
+[![Created Badge](https://badges.pufler.dev/created/ScuroGuardiano/Holy-Grail)](https://badges.pufler.dev)
+
 <p align="center">The Holy Grail of server administration.</p>
 
 <p align="center"><img src="screens/exception.png" /></p>
