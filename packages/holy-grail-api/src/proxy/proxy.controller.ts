@@ -19,7 +19,7 @@ export class ProxyController {
     return this.proxy.availableBackends();
   }
 
-  @Get(':backend/details')
+  @Get(':backend')
   async getDetails(@Param('backend') backend: string) {
     return this.proxy.details(backend);
   }

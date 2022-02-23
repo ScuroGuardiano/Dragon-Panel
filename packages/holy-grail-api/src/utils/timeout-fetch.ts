@@ -8,7 +8,7 @@ export default async function timeoutFetch(timeout: number, request: RequestInfo
   }, timeout);
 
   try {
-    return await fetch(request, options);
+    return await fetch(request, {...options, signal: abortController.signal});
   }
   catch(err) {
     throw err;

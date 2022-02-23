@@ -1,4 +1,4 @@
-import { IsBoolean, IsOptional, IsString } from "class-validator";
+import { ArrayNotEmpty, IsBoolean, IsOptional, IsString } from "class-validator";
 import IProxyAddEntry from "../interfaces/proxy-add-entry";
 
 export default class CreateProxyEntryDTO implements IProxyAddEntry {
@@ -6,6 +6,7 @@ export default class CreateProxyEntryDTO implements IProxyAddEntry {
   matcher: string;
 
   @IsString({ each: true })
+  @ArrayNotEmpty()
   upstreams: string[];
 
   @IsBoolean()

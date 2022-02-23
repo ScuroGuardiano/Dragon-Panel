@@ -163,7 +163,7 @@ export class ProxyService {
   }
 
   availableBackends() {
-    return this.backends.keys();
+    return Array.from(this.backends.keys());
   }
 
   private getBackend(backendId: string): ProxyBackendBase {
