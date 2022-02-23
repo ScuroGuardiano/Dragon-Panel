@@ -1,45 +1,46 @@
-<h1 align="center">Holy Grail</h1>
+<h1 align="center">The Dragon Panel</h1>
 
 [![Visits Badge](https://badges.pufler.dev/visits/ScuroGuardiano/Holy-Grail)](https://badges.pufler.dev)
 [![Created Badge](https://badges.pufler.dev/created/ScuroGuardiano/Holy-Grail)](https://badges.pufler.dev)
 
-<p align="center">The Holy Grail of server administration.</p>
+<p align="center"><img src="screens/dragonpanel.png" /></p>
 
-<p align="center"><img src="screens/exception.png" /></p>
+> Project is in early stage, currently it's almost unusable (well, you can manage domain at least ^^)  
+> But ima workin' hard on it
 
-<h2 align="center">The Chaos</h2>
-<p align="center">At the very beginning there was chaos. Services, VM-s, Containers and anything in between created and managed manually. Every domain entry added on provider's site, every reverse proxy record added by hand. Guardiano got very frustrated by looking at this mess. So in his all mightiness he started creating The Holy Administration Panel that will solve all problem of this chaotic Dark Age. He called it The Holy Grail. Of course he knew he can't do this alone. So he asked for help mighty avatars of holy web development. Chaos is left without a chance against this Divine Crusade. The mighty avatars are:</p>
+Server administration panel designed for self-host web apps with no efford.
+Connecting together:
+- Cloudflare - for domain management
+- Caddy - for http reverse proxy with auto TLS
+- Portainer for managing containers
 
-<h2 align="center">Nest.js</h2>
-<p align="center">Mighty cat that will walk beside me to fight with chaotic forces of evil javascript. With his strong and solid body I shall not be defeated by the Lord of Spaghetti!</p>
+The goal is to deploy web apps with single click, just like you can do on for example Cloudflare or Vercel.
 
-<h2 align="center">Angular</h2>
-<p align="center">Indestructible by the evil forces of Javascript shield. Made with adamantium by the mystic, legendary smiths from the Valley of Gugol</p>
+## Not only the Panel
+This is only the beginning, I am planning to create scripts to easily configure Single VPS or Dedicated Server on Proxmox, which will setup everything ya need to self-host cool web apps. Including:
+- Caddy
+- Portainer
+- The Dragon Panel
+- Prometheus, Loki, InfluxDB and Grafana
+- Backups to S3 storage
+- ***Only Proxmox*** intergrating proxmox with Grafana
 
-<h2 align="center">ngx-ui</h2>
-<p align="center">Cool UI Library ^^ Thanks it I shall not fall to the ancient demon of poor UI desing, which has no name, such mess it is.</p>
 
-<h2 align="center">Yarn</h2>
-<p align="center">Is endless bag, yet it makes it easy to manage my inventory. I shall use it to manage all my holy weapons against evil forces of Chaos!</p>
-
----
-<h1 align="center">How to run this holy project?</h1>
-
-<center>
-
+## Running project
+You need to setup 3 env variables
+```env
+PASSWORD=<PASSWORD_TO_ADMIN_PANEL>
+JWT_SECRET=<strong_random_jwt_secret>
+ENCRYPTION_KEY=<used_to_encrypt_secrets_from_config_should_be_random_and_strong>
+```
+Then run
 ```sh
 yarn install
 yarn start
 ```
 
-</center>
+Go to https://localhost:4200
 
-## Config
-### Backend ENV
-* `CF_API_TOKEN` - Cloudflare API token for managing DNS. Must have priviliges to edit DNS zone.
-* `PASSWORD` - Password to access the panel. Later I will add proper user management, now it's in this way.
-* `JWT_SECRET` - Strong, random JWT secret used to sign JWT tokens.
-
-<h1 align="center">LICENSE</h1>
-<p align="center">Copyright 2022 Scuro Guardiano<br/>
-Project is licensed under AGPLv3.0, check out LICENSE file for full license text.</p>
+# LICENSE
+Copyright 2022 Scuro Guardiano  
+Project is licensed under AGPLv3.0, check out LICENSE file for full license text.

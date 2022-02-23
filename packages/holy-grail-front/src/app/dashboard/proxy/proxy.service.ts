@@ -51,9 +51,9 @@ export class ProxyService {
 
   async getProxyEntries(): Promise<IProxyEntry[]> {
     return [
-      { id: '1', matcher: 'code.scuroguardiano.net', to: 'CodeServer:8080', enabled: true },
-      { id: '2', matcher: 'blog.scuroguardiano.net', to: 'Containers:1337', enabled: true },
-      { id: '3', matcher: 'caddy.scuroguardiano.net', to: 'Caddy:2016', enabled: false }
+      { id: '1', matcher: 'code.example.org', to: 'CodeServer:8080', enabled: true },
+      { id: '2', matcher: 'blog.example.org', to: 'Containers:1337', enabled: true },
+      { id: '3', matcher: 'caddy.example.org', to: 'Caddy:2016', enabled: false }
     ]; // FIXME:
 
     const entries = await this.http.get<IProxyEntry[]>(`${this.proxyUrl}/entries`).toPromise();
