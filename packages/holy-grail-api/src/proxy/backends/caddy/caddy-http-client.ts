@@ -37,7 +37,7 @@ export default class CaddyHttpClient {
       body: JSON.stringify(body),
       headers: {
         'Content-type': "application/json",
-        'Authorization': await this.getAuth()
+        //'Authorization': await this.getAuth()
       }
     });
 
@@ -53,7 +53,7 @@ export default class CaddyHttpClient {
       method,
       headers: {
         'Content-type': "application/json",
-        'Authorization': await this.getAuth()
+        //'Authorization': await this.getAuth()
       }
     });
 
