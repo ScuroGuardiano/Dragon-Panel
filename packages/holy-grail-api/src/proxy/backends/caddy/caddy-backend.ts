@@ -17,7 +17,12 @@ import { CaddyManagedProxyRoute, CaddyRoute, CaddyServers } from "./caddy-interf
 import CaddyUtils from "./caddy-utils";
 
 export default class CaddyBackend extends ProxyBackendBase {
-  private api = this.config.get("CADDY_ADMIN_API");
+  //private api = this.config.get("CADDY_ADMIN_API");
+
+  private get api() {
+    return this.config.get("CADDY_ADMIN_API"); // So after changing config new config will be available here.
+  }
+
   private logger = new Logger("CaddyBackend");
   private http = new CaddyHttpClient(this.config);
   private utils = new CaddyUtils();
