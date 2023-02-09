@@ -1,5 +1,7 @@
 <h1 align="center">The Dragon Panel</h1>
 
+## This repo is no longer maintained! DragonPanel is developed here -> [https://github.com/DragonPanel/DragonPanel](https://github.com/DragonPanel/DragonPanel)
+
 [![Visits Badge](https://badges.pufler.dev/visits/ScuroGuardiano/Holy-Grail)](https://badges.pufler.dev)
 [![Created Badge](https://badges.pufler.dev/created/ScuroGuardiano/Holy-Grail)](https://badges.pufler.dev)
 
